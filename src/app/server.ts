@@ -11,7 +11,8 @@ let server: Server;
 const mainServerRunning = async () => {
     try {
         // Mongodb Database Connect With Mongoose
-        await mongoose.connect(`mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@cluster0.lbzm3xv.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`);
+        const mongoDbUrl = `mongodb+srv://${process.env.MONGO_DB_USER}:${process.env.MONGO_DB_PASS}@cluster0.lbzm3xv.mongodb.net/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+        await mongoose.connect(mongoDbUrl as string);
         console.log(`Database Connected`);
         // Server Connect
         server = app.listen(PORT, () => {
