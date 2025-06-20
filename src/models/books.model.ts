@@ -41,6 +41,9 @@ const bookSchemaModel = new Schema<IBookModel>({
         required: true,
         default: true
     }
+}, {
+    versionKey: false,
+    timestamps: true
 });
 
 // Books Model 

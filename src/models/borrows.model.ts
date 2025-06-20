@@ -7,6 +7,9 @@ const borrowsSchemaModel = new Schema<IBorrowModel>({
     book: Schema.Types.ObjectId,
     quantity: Number,
     dueData: Date
+}, {
+    versionKey: false,
+    timestamps: true
 });
 
 // Borrows Model 
