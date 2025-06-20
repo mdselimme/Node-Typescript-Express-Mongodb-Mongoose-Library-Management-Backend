@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import Books from "../models/books.model";
 
-
+// Create A Book 
 export const createBookPost = async (req: Request, res: Response) => {
     try {
         // book body 
@@ -21,23 +21,46 @@ export const createBookPost = async (req: Request, res: Response) => {
     }
 };
 
+// Get All Books 
 export const getAllBooks = async (req: Request, res: Response) => {
     try {
         // book body 
         const bookBody = req.query;
-        // book insert in db 
-        const getAllBooks = await Books.find({});
+        console.log(bookBody)
+        // get all books from db 
+        const getAllBooksResult = await Books.find({});
         // response send after successful book create method 
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             message: "Books retrieved successfully",
-            data: getAllBooks
+            data: getAllBooksResult
         });
     } catch (error) {
         if (error instanceof Error) {
             console.log(error.message);
         }
     }
-}
+};
+
+// Get A Book By Id 
+export const getABookById = async (req: Request, res: Response) => {
+    try {
+        // book Id Find 
+        const bookId = req.params.bookId;
+        console.log(bookId)
+        // get book from db 
+        const getABookResult = await Books.findById(bookId);
+        // response send after successful book find method 
+        res.status(200).json({
+            success: true,
+            message: "Books retrieved successfully",
+            data: getABookResult
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            console.log(error.message);
+        }
+    }
+};
 
 
