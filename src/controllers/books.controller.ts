@@ -25,10 +25,19 @@ export const createBookPost = async (req: Request, res: Response) => {
 export const getAllBooks = async (req: Request, res: Response) => {
     try {
         // book body 
-        const bookBody = req.query;
-        console.log(bookBody)
+        const { filter, sortBy = "createdAt", sort = "desc", limit = "10" } = req.query;
+        // make query filter object 
+        const query: any = {};
+        if (filter) {
+            query.genre = filter
+        };
+        // making sort Option 
+        const sortOption: any = {};
+        sortOption[sortBy as string] = (sort === "asc" ? 1 : -1);
+        // limit parse 
+        const dataLimit = parseInt(limit as string, 10);
         // get all books from db 
-        const getAllBooksResult = await Books.find({});
+        const getAllBooksResult = await Books.find(query).sort(sortOption).limit(dataLimit);
         // response send after successful book create method 
         res.status(200).json({
             success: true,

@@ -6,5 +6,5 @@ import { Types } from "mongoose"
 export interface IBorrowModel {
     book: Types.ObjectId,
     quantity: number,
-    dueData: Date
+    dueDate: Date
 };

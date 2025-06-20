@@ -5,26 +5,26 @@ import { IBookModel } from "../interfaces/books.interface";
 const bookSchemaModel = new Schema<IBookModel>({
     title: {
         type: String,
-        required: true,
+        required: [true, "title is required"],
         trim: true,
         minlength: [3, "Book name needed min 3 character"]
     },
     author: {
         type: String,
-        required: true,
+        required: [true, "author is required"],
         trim: true,
         minlength: [3, "Author name needed min 3 character"]
     },
     genre: {
         type: String,
-        required: true,
+        required: [true, "genre is required"],
         trim: true,
         uppercase: true,
         enum: ["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"]
     },
     isbn: {
         type: String,
-        required: true,
+        required: [true, "isbn is required"],
         trim: true,
         unique: true
     },
@@ -34,11 +34,11 @@ const bookSchemaModel = new Schema<IBookModel>({
     },
     copies: {
         type: Number,
-        required: true
+        required: [true, "books copies are required"],
     },
     available: {
         type: Boolean,
-        required: true,
+        required: [true, "books availability is required"],
         default: true
     }
 }, {

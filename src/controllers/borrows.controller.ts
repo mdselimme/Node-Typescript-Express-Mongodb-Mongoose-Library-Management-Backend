@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import Borrows from "../models/borrows.model";
-import mongoose from "mongoose";
 
 
 // Borrow A Book function 
@@ -66,7 +65,7 @@ export const getBorrowBooksSummery = async (req: Request, res: Response) => {
             }
         ]);
         // response after successful insert 
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             message: "Borrowed books summary retrieved successfully",
             data: borrowBookSummeryResult

@@ -5,8 +5,14 @@ import { IBorrowModel } from "../interfaces/borrows.interface";
 // Borrows Schema Model with Mongoose 
 const borrowsSchemaModel = new Schema<IBorrowModel>({
     book: Schema.Types.ObjectId,
-    quantity: Number,
-    dueData: Date
+    quantity: {
+        type: Number,
+        required: [true, "Quantity is required."]
+    },
+    dueDate: {
+        type: Date,
+        required: [true, "Due Date is required."]
+    }
 }, {
     versionKey: false,
     timestamps: true
