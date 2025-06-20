@@ -4,9 +4,11 @@ app.use(express.json());
 
 // Routes Imports 
 import booksRouter from '../routes/books.route';
+import borrowsRouter from '../routes/borrows.route';
 
 // Routes Use 
 app.use("/api/books", booksRouter);
+app.use("/api/borrow", borrowsRouter);
 
 
 // Default Router For See Servers ON 

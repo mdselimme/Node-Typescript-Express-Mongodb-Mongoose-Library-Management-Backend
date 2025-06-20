@@ -1,6 +1,6 @@
 import express from "express";
-import { createBookPost, deleteABookById, getABookById, getAllBooks, updateABookById } from "../controllers/books.controller";
 const booksRouter: express.Router = express.Router();
+import { createBookPost, deleteABookById, getABookById, getAllBooks, updateABookById } from "../controllers/books.controller";
 
 // create book post 
 booksRouter.post('/', createBookPost);
