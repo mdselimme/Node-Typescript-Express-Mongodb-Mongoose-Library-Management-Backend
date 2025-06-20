@@ -63,4 +63,26 @@ export const getABookById = async (req: Request, res: Response) => {
     }
 };
 
+// Get A Book By Id 
+export const updateABookById = async (req: Request, res: Response) => {
+    try {
+        // book Id Find 
+        const bookId = req.params.bookId;
+        // book update body 
+        const updateBookBody = req.body;
+        // get book from db 
+        const updateABookByIdResult = await Books.findByIdAndUpdate(bookId, updateBookBody, { new: true });
+        // response send after successful book find method 
+        res.status(201).json({
+            success: true,
+            message: "Book updated successfully",
+            data: updateABookByIdResult
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            console.log(error.message);
+        }
+    }
+};
+
 
