@@ -1,5 +1,5 @@
 import { Server } from "http";
-import app from "./app";
+import app from "./app/app";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 dotenv.config();
