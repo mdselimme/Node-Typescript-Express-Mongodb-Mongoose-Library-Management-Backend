@@ -1,8 +1,8 @@
-import { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { IBookModel } from "../interfaces/books.interface";
 
 // Books Schema Model For Validation Object Model 
-export const bookSchemaModel = new Schema<IBookModel>({
+const bookSchemaModel = new Schema<IBookModel>({
     title: {
         type: String,
         required: true,
@@ -42,4 +42,9 @@ export const bookSchemaModel = new Schema<IBookModel>({
         default: true
     }
 });
+
+// Books Model 
+const Books = model('Books', bookSchemaModel);
+
+export default Books;
 
