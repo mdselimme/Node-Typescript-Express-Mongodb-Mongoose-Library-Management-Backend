@@ -17,7 +17,7 @@ export const borrowABook = async (req: Request, res: Response) => {
         });
     } catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 };

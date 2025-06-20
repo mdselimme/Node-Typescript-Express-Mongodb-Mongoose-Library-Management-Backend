@@ -5,7 +5,7 @@ import { IBookModel } from "../interfaces/books.interface";
 const bookSchemaModel = new Schema<IBookModel>({
     title: {
         type: String,
-        required: [true, "title is required"],
+        required: [true, "book title is required"],
         trim: true,
         minlength: [3, "Book name needed min 3 character"]
     },
@@ -20,13 +20,16 @@ const bookSchemaModel = new Schema<IBookModel>({
         required: [true, "genre is required"],
         trim: true,
         uppercase: true,
-        enum: ["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"]
+        enum: {
+            values: ["FICTION", "NON_FICTION", "SCIENCE", "HISTORY", "BIOGRAPHY", "FANTASY"],
+            message: `{VALUE} is not supported. Please give from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY)`
+        }
     },
     isbn: {
         type: String,
         required: [true, "isbn is required"],
         trim: true,
-        unique: true
+        unique: [true, `isbn is duplicate.Please isbn must be an unique value`]
     },
     description: {
         type: String,
@@ -35,10 +38,15 @@ const bookSchemaModel = new Schema<IBookModel>({
     copies: {
         type: Number,
         required: [true, "books copies are required"],
+        validate: {
+            validator: function (val) {
+                return val > 0;
+            },
+            message: props => `Value must be greater than ${props.value}`
+        }
     },
     available: {
         type: Boolean,
-        required: [true, "books availability is required"],
         default: true
     }
 }, {
