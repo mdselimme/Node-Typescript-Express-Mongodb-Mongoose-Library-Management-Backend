@@ -1,3 +1,4 @@
+import { Document } from "mongoose";
 
 
 
@@ -12,3 +13,7 @@ export interface IBookModel {
     available: boolean
 };
 
+// Update Books Copies and Available Interface 
+export interface IBookModel extends Document {
+    updateBookCopiesAndAvailable(newBookCopies: number): Promise<void>;
+}

@@ -1,5 +1,6 @@
-import { model, Schema, Types } from "mongoose";
-import { IBookModel } from "../interfaces/books.interface";
+import { IBookModel } from './../interfaces/books.interface';
+import { model, Schema } from "mongoose";
+
 
 // Books Schema Model For Validation Object Model 
 const bookSchemaModel = new Schema<IBookModel>({
@@ -54,10 +55,26 @@ const bookSchemaModel = new Schema<IBookModel>({
     timestamps: true
 });
 
+// Update Books Copies and Available 
+bookSchemaModel.methods.updateBookCopiesAndAvailable = async function (newBookCopies: number) {
+    if (newBookCopies <= 0) {
+        throw new Error("Copies must be a positive number");
+    };
+    // update copies 
+    this.copies = this.copies + newBookCopies;
+    if (this.copies > 0) {
+        this.available = true
+    } else if (this.copies === 0) {
+        this.available = false
+    }
+    await this.save();
+    return this;
+}
+
 
 
 // Books Model 
-const Books = model('Books', bookSchemaModel);
+const Books = model<IBookModel>('Books', bookSchemaModel);
 
 export default Books;
 

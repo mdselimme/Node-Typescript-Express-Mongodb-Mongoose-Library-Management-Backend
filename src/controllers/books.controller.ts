@@ -46,7 +46,7 @@ export const getAllBooks = async (req: Request, res: Response) => {
         });
     } catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message })
         }
     }
 };
@@ -56,7 +56,6 @@ export const getABookById = async (req: Request, res: Response) => {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
-        console.log(bookId)
         // get book from db 
         const getABookResult = await Books.findById(bookId);
         // response send after successful book find method 
@@ -67,7 +66,7 @@ export const getABookById = async (req: Request, res: Response) => {
         });
     } catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message })
         }
     }
 };
@@ -77,19 +76,22 @@ export const updateABookById = async (req: Request, res: Response) => {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
-        // book update body 
-        const updateBookBody = req.body;
-        // get book from db and update book
-        const updateABookByIdResult = await Books.findByIdAndUpdate(bookId, updateBookBody, { new: true });
+        const { copies } = req.body;
+        const book = await Books.findById(bookId);
+        if (!book) {
+            throw new Error("Not a valid book id");
+        };
+        await book.updateBookCopiesAndAvailable(copies);
         // response send after successful book find method 
         res.status(201).json({
             success: true,
             message: "Book updated successfully",
-            data: updateABookByIdResult
+            data: book
         });
+
     } catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message })
         }
     }
 };
