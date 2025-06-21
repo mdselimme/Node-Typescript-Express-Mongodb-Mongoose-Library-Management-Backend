@@ -12,7 +12,7 @@ import borrowsRouter from '../routes/borrows.route';
 
 // Default Router For See Servers ON 
 app.get('/', async (req: Request, res: Response) => {
-    res.send("Library Management Server is Running ...");
+    res.json("Library Management Server is Running ...");
 });
 
 // Routes Use 
