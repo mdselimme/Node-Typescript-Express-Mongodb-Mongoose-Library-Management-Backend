@@ -69,7 +69,7 @@ bookSchemaModel.methods.updateBookCopiesAndAvailable = async function (newBookCo
     }
     await this.save();
     return this;
-}
+};
 
 
 // Books Model 
