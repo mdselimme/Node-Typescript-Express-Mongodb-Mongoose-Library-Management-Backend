@@ -16,3 +16,9 @@
   5. User can delete a book by id.
   6. User can borrow a book by id.
   7. User can find all books summery.
+
+## Api Documentation
+
+### Book Api
+
+<b>Api Method:</b>Get

@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import Borrows from "../models/borrows.model";
 
 
 // Borrow A Book function 
-export const borrowABook = async (req: Request, res: Response) => {
+export const borrowABook = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // borrow Book body 
         const borrowABookBody = req.body;
@@ -16,14 +16,12 @@ export const borrowABook = async (req: Request, res: Response) => {
             data: borrowResult
         });
     } catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message });
-        }
+        next(error);
     }
 };
 
 // Borrow A Books Summery Get function 
-export const getBorrowBooksSummery = async (req: Request, res: Response) => {
+export const getBorrowBooksSummery = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // insert borrow in database 
         const borrowBookSummeryResult = await Borrows.aggregate([
@@ -71,8 +69,6 @@ export const getBorrowBooksSummery = async (req: Request, res: Response) => {
             data: borrowBookSummeryResult
         });
     } catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        }
+        next(error);
     }
 };

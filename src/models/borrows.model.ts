@@ -1,4 +1,4 @@
-import { model, Schema, Types } from "mongoose";
+import mongoose, { model, Schema } from "mongoose";
 import { IBorrowModel, IBorrowModelStatic } from "../interfaces/borrows.interface";
 import Books from "./books.model";
 
@@ -8,6 +8,12 @@ const borrowsSchemaModel = new Schema<IBorrowModel>({
     book: {
         type: Schema.Types.ObjectId,
         required: [true, "book id is required"],
+        validate: {
+            validator: function (val: any) {
+                return mongoose.Types.ObjectId.isValid(val);
+            },
+            message: "Invalid Book ObjectId"
+        }
     },
     quantity: {
         type: Number,

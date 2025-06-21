@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import Books from "../models/books.model";
 
 // Create A Book 
-export const createBookPost = async (req: Request, res: Response) => {
+export const createBookPost = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // book body 
         const bookBody = req.body;
@@ -15,14 +15,12 @@ export const createBookPost = async (req: Request, res: Response) => {
             data: bookInsertResult
         });
     } catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message })
-        }
+        next(error)
     }
 };
 
 // Get All Books 
-export const getAllBooks = async (req: Request, res: Response) => {
+export const getAllBooks = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // book body 
         const { filter, sortBy = "createdAt", sort = "desc", limit = "10" } = req.query;
@@ -45,14 +43,12 @@ export const getAllBooks = async (req: Request, res: Response) => {
             data: getAllBooksResult
         });
     } catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message })
-        }
+        next(error)
     }
 };
 
 // Get A Book By Id 
-export const getABookById = async (req: Request, res: Response) => {
+export const getABookById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
@@ -68,14 +64,12 @@ export const getABookById = async (req: Request, res: Response) => {
             data: getABookResult
         });
     } catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message })
-        }
+        next(error)
     }
 };
 
 // Get A Book By Id And Update
-export const updateABookById = async (req: Request, res: Response) => {
+export const updateABookById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
@@ -93,14 +87,12 @@ export const updateABookById = async (req: Request, res: Response) => {
         });
 
     } catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message })
-        }
+        next(error)
     }
 };
 
 // Get A Book By Id And Delete It
-export const deleteABookById = async (req: Request, res: Response) => {
+export const deleteABookById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
@@ -117,9 +109,7 @@ export const deleteABookById = async (req: Request, res: Response) => {
             data: null
         });
     } catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        }
+        next(error)
     }
 };
 
