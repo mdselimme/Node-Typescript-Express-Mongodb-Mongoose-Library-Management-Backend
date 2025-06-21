@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 import { IBookModel } from "../interfaces/books.interface";
 
 // Books Schema Model For Validation Object Model 
@@ -27,7 +27,7 @@ const bookSchemaModel = new Schema<IBookModel>({
     },
     isbn: {
         type: String,
-        required: [true, "isbn is required"],
+        required: [true, "isbn is required and must be unique"],
         trim: true,
         unique: [true, `isbn is duplicate.Please isbn must be an unique value`]
     },
@@ -40,19 +40,21 @@ const bookSchemaModel = new Schema<IBookModel>({
         required: [true, "books copies are required"],
         validate: {
             validator: function (val) {
-                return val > 0;
+                return val >= 0 && typeof val === "number";
             },
-            message: props => `Value must be greater than ${props.value}`
+            message: props => `Value must be greater than ${props.value} and number type`
         }
     },
     available: {
         type: Boolean,
-        default: true
+        default: true,
     }
 }, {
     versionKey: false,
     timestamps: true
 });
+
+
 
 // Books Model 
 const Books = model('Books', bookSchemaModel);

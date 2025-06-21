@@ -1,5 +1,5 @@
-import { isValidObjectId, model, Schema, Types } from "mongoose";
-import { IBorrowModel } from "../interfaces/borrows.interface";
+import { model, Schema, Types } from "mongoose";
+import { IBorrowModel, IBorrowModelStatic } from "../interfaces/borrows.interface";
 import Books from "./books.model";
 
 
@@ -7,16 +7,7 @@ import Books from "./books.model";
 const borrowsSchemaModel = new Schema<IBorrowModel>({
     book: {
         type: Schema.Types.ObjectId,
-        ref: "Books",
-        required: true,
-        validate: {
-            validator: async function (value) {
-                if (!Types.ObjectId.isValid(value)) return false;
-                const bookExists = await Books.findById(value);
-                return !!bookExists;
-            },
-            message: props => `book id is not valid ${props.value}`
-        },
+        required: [true, "book id is required"],
     },
     quantity: {
         type: Number,
@@ -31,7 +22,36 @@ const borrowsSchemaModel = new Schema<IBorrowModel>({
     timestamps: true
 });
 
+// Static Method for borrowing and update 
+borrowsSchemaModel.statics.borrowBookWithUpdateQuantity = async function (borrowBody: IBorrowModel) {
+    // destructer from borrow    
+    const { book, quantity } = borrowBody;
+    const bookFindDocu = await Books.findById(book);
+    // if cannot find the book document in database 
+    if (!bookFindDocu) {
+        throw new Error("Book not found! Please give valid id");
+    };
+    //if book copies are not available or book copies is more than want
+    if (!bookFindDocu.available) {
+        throw new Error("Book is not available.");
+    };
+    if (bookFindDocu.copies < quantity) {
+        throw new Error("Insufficient book copies.");
+    };
+    //minus quantity from book copies
+    bookFindDocu.copies = bookFindDocu.copies - quantity;
+    // if book copies is zero than update available false 
+    if (bookFindDocu.copies === 0) {
+        bookFindDocu.available = false
+    }
+    // save available and copies 
+    await bookFindDocu.save();
+    // create borrow method in database 
+    const borrowResult = await this.create(borrowBody);
+    return borrowResult;
+};
+
 // Borrows Model 
-const Borrows = model("Borrows", borrowsSchemaModel);
+const Borrows = model<IBorrowModel, IBorrowModelStatic>("Borrows", borrowsSchemaModel);
 
 export default Borrows;

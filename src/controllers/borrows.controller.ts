@@ -7,8 +7,8 @@ export const borrowABook = async (req: Request, res: Response) => {
     try {
         // borrow Book body 
         const borrowABookBody = req.body;
-        // insert borrow in database 
-        const borrowResult = await Borrows.create(borrowABookBody);
+        // insert borrow in database and send instance method 
+        const borrowResult = await Borrows.borrowBookWithUpdateQuantity(borrowABookBody);
         // response after successful insert 
         res.status(201).json({
             success: true,
