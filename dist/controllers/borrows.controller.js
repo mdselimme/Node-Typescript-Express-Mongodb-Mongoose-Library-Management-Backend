@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBorrowBooksSummery = exports.borrowABook = void 0;
 const borrows_model_1 = __importDefault(require("../models/borrows.model"));
 // Borrow A Book function 
-const borrowABook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const borrowABook = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // borrow Book body 
         const borrowABookBody = req.body;
@@ -29,14 +29,12 @@ const borrowABook = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
     catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message });
-        }
+        next(error);
     }
 });
 exports.borrowABook = borrowABook;
 // Borrow A Books Summery Get function 
-const getBorrowBooksSummery = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getBorrowBooksSummery = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // insert borrow in database 
         const borrowBookSummeryResult = yield borrows_model_1.default.aggregate([
@@ -85,9 +83,7 @@ const getBorrowBooksSummery = (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
     }
     catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        }
+        next(error);
     }
 });
 exports.getBorrowBooksSummery = getBorrowBooksSummery;

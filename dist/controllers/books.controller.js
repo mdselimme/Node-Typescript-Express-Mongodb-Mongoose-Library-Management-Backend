@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteABookById = exports.updateABookById = exports.getABookById = exports.getAllBooks = exports.createBookPost = void 0;
 const books_model_1 = __importDefault(require("../models/books.model"));
 // Create A Book 
-const createBookPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createBookPost = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // book body 
         const bookBody = req.body;
@@ -29,14 +29,12 @@ const createBookPost = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
     catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message });
-        }
+        next(error);
     }
 });
 exports.createBookPost = createBookPost;
 // Get All Books 
-const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllBooks = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // book body 
         const { filter, sortBy = "createdAt", sort = "desc", limit = "10" } = req.query;
@@ -61,14 +59,12 @@ const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
     catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message });
-        }
+        next(error);
     }
 });
 exports.getAllBooks = getAllBooks;
 // Get A Book By Id 
-const getABookById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getABookById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
@@ -85,14 +81,12 @@ const getABookById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         });
     }
     catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message });
-        }
+        next(error);
     }
 });
 exports.getABookById = getABookById;
 // Get A Book By Id And Update
-const updateABookById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateABookById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
@@ -111,14 +105,12 @@ const updateABookById = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
     catch (error) {
-        if (error instanceof Error) {
-            res.status(400).json({ message: error.message });
-        }
+        next(error);
     }
 });
 exports.updateABookById = updateABookById;
 // Get A Book By Id And Delete It
-const deleteABookById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteABookById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
@@ -137,9 +129,7 @@ const deleteABookById = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
     catch (error) {
-        if (error instanceof Error) {
-            console.log(error.message);
-        }
+        next(error);
     }
 });
 exports.deleteABookById = deleteABookById;
