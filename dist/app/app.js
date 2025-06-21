@@ -17,8 +17,10 @@ const app = (0, express_1.default)();
 app.use(express_1.default.json());
 // Routes Imports 
 const books_route_1 = __importDefault(require("../routes/books.route"));
+const borrows_route_1 = __importDefault(require("../routes/borrows.route"));
 // Routes Use 
 app.use("/api/books", books_route_1.default);
+app.use("/api/borrow", borrows_route_1.default);
 // Default Router For See Servers ON 
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("Library Management Server is Running ...");

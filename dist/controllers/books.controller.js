@@ -30,7 +30,7 @@ const createBookPost = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
     catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 });
@@ -39,10 +39,20 @@ exports.createBookPost = createBookPost;
 const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // book body 
-        const bookBody = req.query;
-        console.log(bookBody);
+        const { filter, sortBy = "createdAt", sort = "desc", limit = "10" } = req.query;
+        // make query filter object 
+        const query = {};
+        if (filter) {
+            query.genre = filter;
+        }
+        ;
+        // making sort Option 
+        const sortOption = {};
+        sortOption[sortBy] = (sort === "asc" ? 1 : -1);
+        // limit parse 
+        const dataLimit = parseInt(limit, 10);
         // get all books from db 
-        const getAllBooksResult = yield books_model_1.default.find({});
+        const getAllBooksResult = yield books_model_1.default.find(query).sort(sortOption).limit(dataLimit);
         // response send after successful book create method 
         res.status(200).json({
             success: true,
@@ -52,7 +62,7 @@ const getAllBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
     catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 });
@@ -62,9 +72,11 @@ const getABookById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         // book Id Find 
         const bookId = req.params.bookId;
-        console.log(bookId);
         // get book from db 
         const getABookResult = yield books_model_1.default.findById(bookId);
+        if (!getABookResult) {
+            throw new Error("Id is not valid. Please give a Valid id");
+        }
         // response send after successful book find method 
         res.status(200).json({
             success: true,
@@ -74,7 +86,7 @@ const getABookById = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
     catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 });
@@ -84,20 +96,23 @@ const updateABookById = (req, res) => __awaiter(void 0, void 0, void 0, function
     try {
         // book Id Find 
         const bookId = req.params.bookId;
-        // book update body 
-        const updateBookBody = req.body;
-        // get book from db and update book
-        const updateABookByIdResult = yield books_model_1.default.findByIdAndUpdate(bookId, updateBookBody, { new: true });
+        const { copies } = req.body;
+        const book = yield books_model_1.default.findById(bookId);
+        if (!book) {
+            throw new Error("Not a valid book id");
+        }
+        ;
+        yield book.updateBookCopiesAndAvailable(copies);
         // response send after successful book find method 
         res.status(201).json({
             success: true,
             message: "Book updated successfully",
-            data: updateABookByIdResult
+            data: book
         });
     }
     catch (error) {
         if (error instanceof Error) {
-            console.log(error.message);
+            res.status(400).json({ message: error.message });
         }
     }
 });
@@ -107,6 +122,11 @@ const deleteABookById = (req, res) => __awaiter(void 0, void 0, void 0, function
     try {
         // book Id Find 
         const bookId = req.params.bookId;
+        const book = yield books_model_1.default.findById(bookId);
+        if (!book) {
+            throw new Error("Not a valid book id");
+        }
+        ;
         // get book from db and delete book
         yield books_model_1.default.findByIdAndDelete(bookId);
         // response send after successful book delete method 

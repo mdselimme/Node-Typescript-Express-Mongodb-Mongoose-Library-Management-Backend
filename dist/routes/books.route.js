@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const books_controller_1 = require("../controllers/books.controller");
 const booksRouter = express_1.default.Router();
+const books_controller_1 = require("../controllers/books.controller");
 // create book post 
 booksRouter.post('/', books_controller_1.createBookPost);
 // get all books 
