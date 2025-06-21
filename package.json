@@ -8,7 +8,8 @@
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
@@ -29,5 +30,10 @@
     "globals": "^16.2.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1"
+  },
+  "eslintConfig": {
+    "ignorePatterns": [
+      "dist/"
+    ]
   }
 }
