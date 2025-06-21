@@ -7,5 +7,6 @@ export const errorHandler: ErrorRequestHandler = (err: any, req: Request, res: R
         success: false,
         error: err
     };
-    res.status(err.statusCode || 500).send(errorResponseMessage)
+    const errorStatusCode = err.statusCode || 500;
+    res.status(errorStatusCode).send(errorResponseMessage);
 };
