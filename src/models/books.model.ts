@@ -72,7 +72,6 @@ bookSchemaModel.methods.updateBookCopiesAndAvailable = async function (newBookCo
 }
 
 
-
 // Books Model 
 const Books = model<IBookModel>('Books', bookSchemaModel);
 

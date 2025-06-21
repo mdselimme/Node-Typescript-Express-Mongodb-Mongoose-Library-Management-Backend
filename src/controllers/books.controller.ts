@@ -58,6 +58,9 @@ export const getABookById = async (req: Request, res: Response) => {
         const bookId = req.params.bookId;
         // get book from db 
         const getABookResult = await Books.findById(bookId);
+        if (!getABookResult) {
+            throw new Error("Id is not valid. Please give a Valid id");
+        }
         // response send after successful book find method 
         res.status(200).json({
             success: true,
@@ -101,6 +104,10 @@ export const deleteABookById = async (req: Request, res: Response) => {
     try {
         // book Id Find 
         const bookId = req.params.bookId;
+        const book = await Books.findById(bookId);
+        if (!book) {
+            throw new Error("Not a valid book id");
+        };
         // get book from db and delete book
         await Books.findByIdAndDelete(bookId);
         // response send after successful book delete method 
