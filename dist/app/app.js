@@ -25,7 +25,7 @@ const borrows_route_1 = __importDefault(require("../routes/borrows.route"));
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({
         running: "Library Management Server is Running ...",
-        version: 0.3
+        version: 0.1
     });
 }));
 // Routes Use 
