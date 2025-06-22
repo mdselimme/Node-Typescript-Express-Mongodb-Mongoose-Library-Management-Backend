@@ -10,9 +10,13 @@ import { errorHandler } from './errorHandler';
 import booksRouter from '../routes/books.route';
 import borrowsRouter from '../routes/borrows.route';
 
+
 // Default Router For See Servers ON 
 app.get('/', async (req: Request, res: Response) => {
-    res.json("Library Management Server is Running ...");
+    res.json({
+        running: "Library Management Server is Running ...",
+        version: 0.3
+    });
 });
 
 // Routes Use 
