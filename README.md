@@ -269,24 +269,24 @@ change sort : asc or desc (default desc method);
 
 ```json
 {
-  "success": true,
-  "message": "Borrowed books summary retrieved successfully",
-  "data": [
-    {
-      "book": {
-        "title": "The Theory of Everything",
-        "isbn": "9780553380163"
-      },
-      "totalQuantity": 5
-    },
-    {
-      "book": {
-        "title": "1984",
-        "isbn": "9780451524935"
-      },
-      "totalQuantity": 3
-    }
-  ]
-}
+    "success": true,
+    "message": "Borrowed books summary retrieved successfully",
+    "data": [
+        {
+            "totalQuantity": 55,
+            "book": {
+                "title": "JavaScript ES6 and Beyond",
+                "isbn": "9780134598628"
+            }
+        },
+        {
+            "totalQuantity": 100,
+            "book": {
+                "title": "Clean Architecture with React",
+                "isbn": "9780134494166"
+            }
+        },
+    ]
+};
 
 ```

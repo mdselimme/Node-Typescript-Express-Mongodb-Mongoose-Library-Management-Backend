@@ -55,7 +55,7 @@ const bookSchemaModel = new Schema<IBookModel>({
     timestamps: true
 });
 
-// Update Books Copies and Available 
+//Intance method Update Books Copies and Available 
 bookSchemaModel.methods.updateBookCopiesAndAvailable = async function (newBookCopies: number) {
     if (newBookCopies <= 0) {
         throw new Error("Copies must be a positive number");
