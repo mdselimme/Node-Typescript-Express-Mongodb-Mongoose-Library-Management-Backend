@@ -4,7 +4,8 @@
 
     * Node js and Express js and typescript for backend technology.
     * For database I use mongodb and mongoose ORM.
-    * I use middleware and instance methods and statics method for data find and exists.
+    * Use instance methods and statics method for data find and exists.
+    * Use pre and post middleware when borrow data deletion.
     * For backend hosting I use vercel.
 
 - It's a library management backend server. Where you can borrow books. Core Features:
@@ -290,3 +291,19 @@ change sort : asc or desc (default desc method);
 };
 
 ```
+
+### 8\. Delete A Borrow Book By Id
+
+**DELETE** `https://library-management-server-s.vercel.app/api/borrow/:bookId`
+
+#### Response:
+
+```json
+{
+  "success": true,
+  "message":  "Borrow book deleted successfully",
+  "data": null
+}
+```
+
+---
