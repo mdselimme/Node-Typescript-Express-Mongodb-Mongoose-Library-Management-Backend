@@ -23,8 +23,6 @@ app.get('/', async (req: Request, res: Response) => {
 app.use("/api/books", booksRouter);
 app.use("/api/borrow", borrowsRouter);
 
-// error Handling Middleware 
-app.use(errorHandler);
 
 // Not found route 
 app.use((req: Request, res: Response, next: NextFunction) => {
@@ -33,6 +31,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     })
 });
 
+// error Handling Middleware 
+app.use(errorHandler);
 
 
 export default app;

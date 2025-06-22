@@ -72,3 +72,24 @@ export const getBorrowBooksSummery = async (req: Request, res: Response, next: N
         next(error);
     }
 };
+
+// Delete A book By Id 
+export const deleteABorrowById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { bookId } = req.params;
+        const deletedBook = await Borrows.findByIdAndDelete(bookId);
+
+        if (!deletedBook) {
+            throw new Error("Book Id Not Found. Give a valid id.");
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Borrow book deleted successfully",
+            data: null,
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}

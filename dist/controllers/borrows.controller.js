@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getBorrowBooksSummery = exports.borrowABook = void 0;
+exports.deleteABorrowById = exports.getBorrowBooksSummery = exports.borrowABook = void 0;
 const borrows_model_1 = __importDefault(require("../models/borrows.model"));
 // Borrow A Book function 
 const borrowABook = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -87,3 +87,22 @@ const getBorrowBooksSummery = (req, res, next) => __awaiter(void 0, void 0, void
     }
 });
 exports.getBorrowBooksSummery = getBorrowBooksSummery;
+// Delete A book By Id 
+const deleteABorrowById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { bookId } = req.params;
+        const deletedBook = yield borrows_model_1.default.findByIdAndDelete(bookId);
+        if (!deletedBook) {
+            throw new Error("Book Id Not Found. Give a valid id.");
+        }
+        res.status(200).json({
+            success: true,
+            message: "Borrow book deleted successfully",
+            data: null,
+        });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+exports.deleteABorrowById = deleteABorrowById;

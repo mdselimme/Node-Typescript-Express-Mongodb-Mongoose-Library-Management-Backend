@@ -74,36 +74,67 @@ const borrowsSchemaModel = new mongoose_1.Schema({
 // Static Method for borrowing and update 
 borrowsSchemaModel.statics.borrowBookWithUpdateQuantity = function (borrowBody) {
     return __awaiter(this, void 0, void 0, function* () {
-        // destructer from borrow    
+        // property find from borrow    
         const { book, quantity } = borrowBody;
-        const bookFindDocu = yield books_model_1.default.findById(book);
+        const bookFindDocument = yield books_model_1.default.findById(book);
         // if cannot find the book document in database 
-        if (!bookFindDocu) {
+        if (!bookFindDocument) {
             throw new Error("Book not found! Please give valid id");
         }
         ;
         //if book copies are not available or book copies is more than want
-        if (!bookFindDocu.available) {
+        if (!bookFindDocument.available) {
             throw new Error("Book is not available.");
         }
         ;
-        if (bookFindDocu.copies < quantity) {
+        if (bookFindDocument.copies < quantity) {
             throw new Error("Insufficient book copies.");
         }
         ;
         //minus quantity from book copies
-        bookFindDocu.copies = bookFindDocu.copies - quantity;
+        bookFindDocument.copies = bookFindDocument.copies - quantity;
         // if book copies is zero than update available false 
-        if (bookFindDocu.copies === 0) {
-            bookFindDocu.available = false;
+        if (bookFindDocument.copies === 0) {
+            bookFindDocument.available = false;
         }
         // save available and copies 
-        yield bookFindDocu.save();
+        yield bookFindDocument.save();
         // create borrow method in database 
         const borrowResult = yield this.create(borrowBody);
         return borrowResult;
     });
 };
+// Find And Delete Pre middleware 
+borrowsSchemaModel.pre("findOneAndDelete", function (next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const query = this.getQuery();
+            const doc = yield Borrows.findOne(query);
+            if (doc) {
+                console.log("going to delete doc");
+            }
+            else {
+                console.log('No doc found in pre middleware');
+            }
+            next();
+        }
+        catch (error) {
+            next(error);
+        }
+    });
+});
+//Deleted Book Post middleware
+borrowsSchemaModel.post("findOneAndDelete", function (doc, next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (doc) {
+            console.log("Deleted Book:", doc.book);
+        }
+        else {
+            console.log('Nothing was deleted');
+        }
+        next();
+    });
+});
 // Borrows Model 
 const Borrows = (0, mongoose_1.model)("Borrows", borrowsSchemaModel);
 exports.default = Borrows;

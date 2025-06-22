@@ -10,4 +10,6 @@ const borrows_controller_1 = require("../controllers/borrows.controller");
 borrowsRouter.post('/', borrows_controller_1.borrowABook);
 //get borrow books summery route
 borrowsRouter.get('/', borrows_controller_1.getBorrowBooksSummery);
+// borrow a book delete by id 
+borrowsRouter.delete('/:bookId', borrows_controller_1.deleteABorrowById);
 exports.default = borrowsRouter;
