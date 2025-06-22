@@ -6,11 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.errorHandler = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const errorHandler = (err, req, res, next) => {
+    // Main Error Message 
     let errorResponseMessage = {
         message: err.message,
         success: false,
         error: err
     };
+    // If error cause when validation error 
     if (err instanceof mongoose_1.default.Error.ValidationError) {
         errorResponseMessage = {
             message: 'Validation failed',
@@ -23,6 +25,7 @@ const errorHandler = (err, req, res, next) => {
         };
     }
     ;
+    // If error cause when validator 
     if (err instanceof mongoose_1.default.Error.ValidatorError) {
         errorResponseMessage = {
             message: 'Validator failed',
@@ -35,6 +38,7 @@ const errorHandler = (err, req, res, next) => {
         };
     }
     ;
+    // If error cause when case error 
     if (err instanceof mongoose_1.default.Error.CastError) {
         errorResponseMessage = {
             message: 'Validation failed',
@@ -47,7 +51,8 @@ const errorHandler = (err, req, res, next) => {
         };
     }
     ;
-    const errorStatusCode = err.statusCode || 500;
+    // send error message 
+    const errorStatusCode = err.statusCode || 404;
     res.status(errorStatusCode).send(errorResponseMessage);
 };
 exports.errorHandler = errorHandler;

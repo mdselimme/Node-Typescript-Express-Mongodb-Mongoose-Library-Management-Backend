@@ -16,7 +16,7 @@ const bookSchemaModel = new mongoose_1.Schema({
         type: String,
         required: [true, "book title is required"],
         trim: true,
-        minlength: [3, "Book name needed min 3 character"]
+        minlength: [3, "Book Title needed min 3 character"],
     },
     author: {
         type: String,

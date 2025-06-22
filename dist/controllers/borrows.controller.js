@@ -47,7 +47,7 @@ const getBorrowBooksSummery = (req, res, next) => __awaiter(void 0, void 0, void
                     as: "bookData"
                 }
             },
-            // bookdata array to object 
+            // book data array to object 
             {
                 $unwind: "$bookData"
             },

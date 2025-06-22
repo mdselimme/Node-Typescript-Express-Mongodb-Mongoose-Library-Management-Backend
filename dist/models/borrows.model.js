@@ -62,10 +62,22 @@ const borrowsSchemaModel = new mongoose_1.Schema({
     quantity: {
         type: Number,
         required: [true, "Quantity is required."],
+        validate: {
+            validator: function (value) {
+                return typeof value === 'number' && !isNaN(value) && value > 0;
+            },
+            message: "Quantity value must be positive and number type"
+        }
     },
     dueDate: {
         type: Date,
         required: [true, "Due Date is required."],
+        validate: {
+            validator: function (value) {
+                return !isNaN(value.getTime());
+            },
+            message: "Invalid date type. Date must be an ISO String"
+        }
     }
 }, {
     versionKey: false,
