@@ -34,7 +34,7 @@ export const getBorrowBooksSummery = async (req: Request, res: Response, next: N
                     as: "bookData"
                 }
             },
-            // bookdata array to object 
+            // book data array to object 
             {
                 $unwind: "$bookData"
             },
@@ -82,7 +82,6 @@ export const deleteABorrowById = async (req: Request, res: Response, next: NextF
         if (!deletedBook) {
             throw new Error("Book Id Not Found. Give a valid id.");
         }
-
         res.status(200).json({
             success: true,
             message: "Borrow book deleted successfully",

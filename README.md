@@ -328,7 +328,7 @@ change sort : asc or desc (default desc method);
 
 ### Demo Error Response
 
-- If you cannot give genre value you will find an error like this.
+- If you cannot give genre value any of these types (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY). you will find an error like this.
 
 ```json
 {

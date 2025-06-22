@@ -4,6 +4,7 @@ import Books from "./books.model";
 import { NextFunction } from "express";
 
 
+
 // Borrows Schema Model with Mongoose 
 const borrowsSchemaModel = new Schema<IBorrowModel>({
     book: {
@@ -19,10 +20,22 @@ const borrowsSchemaModel = new Schema<IBorrowModel>({
     quantity: {
         type: Number,
         required: [true, "Quantity is required."],
+        validate: {
+            validator: function (value) {
+                return typeof value === 'number' && !isNaN(value) && value > 0;
+            },
+            message: "Quantity value must be positive and number type"
+        }
     },
     dueDate: {
         type: Date,
         required: [true, "Due Date is required."],
+        validate: {
+            validator: function (value: Date) {
+                return !isNaN(value.getTime())
+            },
+            message: "Invalid date type. Date must be an ISO String"
+        }
     }
 }, {
     versionKey: false,
