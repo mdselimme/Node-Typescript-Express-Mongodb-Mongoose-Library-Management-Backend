@@ -3,12 +3,15 @@ import mongoose from "mongoose";
 
 
 export const errorHandler: ErrorRequestHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+
+    // Main Error Message 
     let errorResponseMessage = {
         message: err.message,
         success: false,
         error: err
     };
 
+    // If error cause when validation error 
     if (err instanceof mongoose.Error.ValidationError) {
         errorResponseMessage = {
             message: 'Validation failed',
@@ -21,6 +24,7 @@ export const errorHandler: ErrorRequestHandler = (err: any, req: Request, res: R
         };
     };
 
+    // If error cause when validator 
     if (err instanceof mongoose.Error.ValidatorError) {
         errorResponseMessage = {
             message: 'Validator failed',
@@ -33,6 +37,7 @@ export const errorHandler: ErrorRequestHandler = (err: any, req: Request, res: R
         };
     };
 
+    // If error cause when case error 
     if (err instanceof mongoose.Error.CastError) {
         errorResponseMessage = {
             message: 'Validation failed',
@@ -45,8 +50,8 @@ export const errorHandler: ErrorRequestHandler = (err: any, req: Request, res: R
         };
     };
 
-
-    const errorStatusCode = err.statusCode || 500;
+    // send error message 
+    const errorStatusCode = err.statusCode || 404;
     res.status(errorStatusCode).send(errorResponseMessage);
 
 };
