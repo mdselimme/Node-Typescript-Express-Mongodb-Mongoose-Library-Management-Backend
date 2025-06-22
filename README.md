@@ -40,15 +40,23 @@ _Api Base Url_ (https://library-management-server-s.vercel.app/)
 
 #### Schema Model:
 
+- title must greater than or equal 3 characters (required)
+- author length must greater than or equal 3 characters (required)
+- genre must be from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY) (required)
+- isbn must be an unique value (required)
+- description is optional (optional)
+- copies must be and positive number (required)
+- available default true (required)
+
 ```json
 {
-  "title":"string", //title must greater than or equal 3 characters (required)
-  "author":"string", //length must greater than or equal 3 characters (required)
-  "genre":"string", // must be from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY) (required)
-  "isbn": "string", //must be an unique value (required)
-  "description": "string",// (optional)
-  "copies": "number", //must be and positive number (required)
-  "available": "boolean" //default true (required)
+  "title":"string",
+  "author":"string",
+  "genre":"string",
+  "isbn": "string",
+  "description": "string",
+  "copies": "number",
+  "available": "boolean"
 }
 
 ```
