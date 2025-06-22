@@ -62,7 +62,7 @@ const bookSchemaModel = new mongoose_1.Schema({
     versionKey: false,
     timestamps: true
 });
-// Update Books Copies and Available 
+//Intance method Update Books Copies and Available 
 bookSchemaModel.methods.updateBookCopiesAndAvailable = function (newBookCopies) {
     return __awaiter(this, void 0, void 0, function* () {
         if (newBookCopies <= 0) {

@@ -65,7 +65,7 @@ const borrowsSchemaModel = new mongoose_1.Schema({
     },
     dueDate: {
         type: Date,
-        required: [true, "Due Date is required."]
+        required: [true, "Due Date is required."],
     }
 }, {
     versionKey: false,
