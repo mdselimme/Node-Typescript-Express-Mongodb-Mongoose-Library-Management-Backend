@@ -20,12 +20,15 @@
 
 ## Api Documentation
 
-_Api Base Url_ (https://library-management-server-s.vercel.app/)
+Api Base Url: (https://library-management-server-s.vercel.app/)
 
 ### response
 
 ```json
-"Library Management Server is Running ..."
+{
+  "running": "Library Management Server is Running ...",
+  "version": 0.1
+}
 ```
 
 --
@@ -64,35 +67,35 @@ _Api Base Url_ (https://library-management-server-s.vercel.app/)
 #### Request:
 
 ```json
-{
-  "title": "The Theory of Everything",
-  "author": "Stephen Hawking",
-  "genre": "SCIENCE",
-  "isbn": "9780553380163",
-  "description": "An overview of cosmology and black holes.",
-  "copies": 5,
-  "available": true
-}
+  {
+    "title": "Practical Next.js",
+    "author": "Fahim Rahman",
+    "genre": "NON_FICTION",
+    "isbn": "9781803244501",
+    "description": "Build performant web apps with Next.js.",
+    "copies": 29,
+    "available": true
+  }
 ```
 
 #### Response:
 
 ```json
 {
-  "success": true,
-  "message": "Book created successfully",
-  "data": {
-    "_id": "64f123abc4567890def12345",
-    "title": "The Theory of Everything",
-    "author": "Stephen Hawking",
-    "genre": "SCIENCE",
-    "isbn": "9780553380163",
-    "description": "An overview of cosmology and black holes.",
-    "copies": 5,
-    "available": true,
-    "createdAt": "2024-11-19T10:23:45.123Z",
-    "updatedAt": "2024-11-19T10:23:45.123Z"
-  }
+    "success": true,
+    "message": "Book created successfully",
+    "data": {
+        "title": "Practical Next.js",
+        "author": "Fahim Rahman",
+        "genre": "NON_FICTION",
+        "isbn": "9781803244501",
+        "description": "Build performant web apps with Next.js.",
+        "copies": 29,
+        "available": true,
+        "_id": "685802edc92b4ed7b9e888be",
+        "createdAt": "2025-06-22T13:19:41.271Z",
+        "updatedAt": "2025-06-22T13:19:41.271Z"
+    }
 }
 ```
 
@@ -114,23 +117,23 @@ change sort : asc or desc (default desc method);
 
 ```json
 {
-  "success": true,
-  "message": "Books retrieved successfully",
-  "data": [
-    {
-      "_id": "64f123abc4567890def12345",
-      "title": "The Theory of Everything",
-      "author": "Stephen Hawking",
-      "genre": "SCIENCE",
-      "isbn": "9780553380163",
-      "description": "An overview of cosmology and black holes.",
-      "copies": 5,
-      "available": true,
-      "createdAt": "2024-11-19T10:23:45.123Z",
-      "updatedAt": "2024-11-19T10:23:45.123Z"
-    }
-    {...}
-  ]
+    "success": true,
+    "message": "Books retrieved successfully",
+    "data": [
+        {
+            "_id": "685802edc92b4ed7b9e888be",
+            "title": "Practical Next.js",
+            "author": "Fahim Rahman",
+            "genre": "NON_FICTION",
+            "isbn": "9781803244501",
+            "description": "Build performant web apps with Next.js.",
+            "copies": 29,
+            "available": true,
+            "createdAt": "2025-06-22T13:19:41.271Z",
+            "updatedAt": "2025-06-22T13:19:41.271Z"
+        },
+        {...},
+    ]
 }
 ```
 
@@ -144,20 +147,20 @@ change sort : asc or desc (default desc method);
 
 ```json
 {
-  "success": true,
-  "message": "Book retrieved successfully",
-  "data": {
-    "_id": "64f123abc4567890def12345",
-    "title": "The Theory of Everything",
-    "author": "Stephen Hawking",
-    "genre": "SCIENCE",
-    "isbn": "9780553380163",
-    "description": "An overview of cosmology and black holes.",
-    "copies": 5,
-    "available": true,
-    "createdAt": "2024-11-19T10:23:45.123Z",
-    "updatedAt": "2024-11-19T10:23:45.123Z"
-  }
+    "success": true,
+    "message": "Books retrieved successfully",
+    "data": {
+        "_id": "685802edc92b4ed7b9e888be",
+        "title": "Practical Next.js",
+        "author": "Fahim Rahman",
+        "genre": "NON_FICTION",
+        "isbn": "9781803244501",
+        "description": "Build performant web apps with Next.js.",
+        "copies": 29,
+        "available": true,
+        "createdAt": "2025-06-22T13:19:41.271Z",
+        "updatedAt": "2025-06-22T13:19:41.271Z"
+    }
 }
 ```
 
@@ -171,7 +174,7 @@ change sort : asc or desc (default desc method);
 
 ```json
 {
-  "copies": number //value must positive number
+  "copies": "number" //value must positive number
 }
 ```
 
@@ -187,20 +190,20 @@ change sort : asc or desc (default desc method);
 
 ```json
 {
-  "success": true,
-  "message": "Book updated successfully",
-  "data": {
-    "_id": "64f123abc4567890def12345",
-    "title": "The Theory of Everything",
-    "author": "Stephen Hawking",
-    "genre": "SCIENCE",
-    "isbn": "9780553380163",
-    "description": "An overview of cosmology and black holes.",
-    "copies": 50,
-    "available": true,
-    "createdAt": "2024-11-19T10:23:45.123Z",
-    "updatedAt": "2024-11-20T08:30:00.000Z"
-  }
+    "success": true,
+    "message": "Book updated successfully",
+    "data": {
+        "_id": "685802edc92b4ed7b9e888be",
+        "title": "Practical Next.js",
+        "author": "Fahim Rahman",
+        "genre": "NON_FICTION",
+        "isbn": "9781803244501",
+        "description": "Build performant web apps with Next.js.",
+        "copies": 69,
+        "available": true,
+        "createdAt": "2025-06-22T13:19:41.271Z",
+        "updatedAt": "2025-06-22T13:22:37.837Z"
+    }
 }
 ```
 
@@ -232,13 +235,16 @@ change sort : asc or desc (default desc method);
 
 #### Schema Model:
 
+- book ObjectId (required)
+- quantity must be greater than 0 (required)
+- Date iso string (required)
+
 ```json
 {
-  "book":string,  // book ObjectId need (required)
-  "quantity":number, // must be greater than 0 (required)
-  "dueDate":string, // Date iso (required)
+  "book": ObjectId,
+  "quantity":"number",
+  "dueDate":"string",
 }
-
 ```
 
 #### Request:
@@ -315,3 +321,45 @@ change sort : asc or desc (default desc method);
 ```
 
 ---
+
+## Error Response
+
+---
+
+### Demo Error Response
+
+- If you cannot give genre value you will find an error like this.
+
+```json
+{
+    "message": "Validation failed",
+    "success": false,
+    "error": {
+        "name": "ValidationError",
+        "message": "Books validation failed: genre: NON_FICTIOSN is not supported. Please give from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY)",
+        "errors": {
+            "genre": {
+                "name": "ValidatorError",
+                "message": "NON_FICTIOSN is not supported. Please give from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY)",
+                "properties": {
+                    "message": "NON_FICTIOSN is not supported. Please give from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY)",
+                    "type": "enum",
+                    "enumValues": [
+                        "FICTION",
+                        "NON_FICTION",
+                        "SCIENCE",
+                        "HISTORY",
+                        "BIOGRAPHY",
+                        "FANTASY"
+                    ],
+                    "path": "genre",
+                    "value": "NON_FICTIOSN"
+                },
+                "kind": "enum",
+                "path": "genre",
+                "value": "NON_FICTIOSN"
+            }
+        }
+    }
+}
+```
