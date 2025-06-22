@@ -41,13 +41,13 @@ _Api Base Url_ (https://library-management-server-s.vercel.app/)
 
 ```json
 {
-  title:string, //title must greater than or equal 3 characters (required)
-  author:string, //length must greater than or equal 3 characters (required)
-  genre:string, // must be from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY) (required)
-  isbn: string, //must be an unique value (required)
-  description: string,// (optional)
-  copies: number, //must be and positive number (required)
-  available: boolean //default true (required)
+  "title":string, //title must greater than or equal 3 characters (required)
+  "author":string, //length must greater than or equal 3 characters (required)
+  "genre":string, // must be from these (FICTION, NON_FICTION, SCIENCE, HISTORY, BIOGRAPHY, FANTASY) (required)
+  "isbn": string, //must be an unique value (required)
+  "description": string,// (optional)
+  "copies": number, //must be and positive number (required)
+  "available": boolean //default true (required)
 }
 
 ```
@@ -158,11 +158,19 @@ change sort : asc or desc (default desc method);
 
 **PUT** `https://library-management-server-s.vercel.app/api/books/:bookId`
 
+#### Schema model:
+
+```json
+{
+  "copies": number //value must positive number
+}
+```
+
 #### Request:
 
 ```json
 {
-  "copies": 50 //value must positive number
+  "copies": 50
 }
 ```
 
@@ -212,6 +220,17 @@ change sort : asc or desc (default desc method);
 ### 6\. Borrow a Book
 
 **POST** `https://library-management-server-s.vercel.app/api/borrow`
+
+#### Schema Model:
+
+```json
+{
+  "book":string,  // book ObjectId need (required)
+  "quantity":number, // must be greater than 0 (required)
+  "dueDate":string, // Date iso (required)
+}
+
+```
 
 #### Request:
 
