@@ -9,7 +9,7 @@ booksRouter.get('/', getAllBooks);
 // get a book by id
 booksRouter.get('/:bookId', getABookById);
 // update a book by id
-booksRouter.patch('/:bookId', updateABookById);
+booksRouter.put('/:bookId', updateABookById);
 // delete a book by id
 booksRouter.delete('/:bookId', deleteABookById);
 
