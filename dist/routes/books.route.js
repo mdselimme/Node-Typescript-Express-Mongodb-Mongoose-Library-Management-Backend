@@ -13,7 +13,7 @@ booksRouter.get('/', books_controller_1.getAllBooks);
 // get a book by id
 booksRouter.get('/:bookId', books_controller_1.getABookById);
 // update a book by id
-booksRouter.patch('/:bookId', books_controller_1.updateABookById);
+booksRouter.put('/:bookId', books_controller_1.updateABookById);
 // delete a book by id
 booksRouter.delete('/:bookId', books_controller_1.deleteABookById);
 exports.default = booksRouter;
