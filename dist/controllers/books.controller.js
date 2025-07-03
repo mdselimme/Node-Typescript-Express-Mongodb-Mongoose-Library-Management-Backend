@@ -90,13 +90,13 @@ const updateABookById = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
     try {
         // book Id Find 
         const bookId = req.params.bookId;
-        const { copies } = req.body;
+        const body = req.body;
         const book = yield books_model_1.default.findById(bookId);
         if (!book) {
             throw new Error("Not a valid book id");
         }
         ;
-        yield book.updateBookCopiesAndAvailable(copies);
+        yield book.updateABookData(body);
         // response send after successful book find method 
         res.status(201).json({
             success: true,

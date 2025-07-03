@@ -15,7 +15,7 @@ import borrowsRouter from '../routes/borrows.route';
 app.get('/', async (req: Request, res: Response) => {
     res.json({
         running: "Library Management Server is Running ...",
-        version: 0.3
+        version: 0.4
     });
 });
 
