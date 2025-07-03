@@ -73,12 +73,12 @@ export const updateABookById = async (req: Request, res: Response, next: NextFun
     try {
         // book Id Find 
         const bookId = req.params.bookId;
-        const { copies } = req.body;
+        const body = req.body;
         const book = await Books.findById(bookId);
         if (!book) {
             throw new Error("Not a valid book id");
         };
-        await book.updateBookCopiesAndAvailable(copies);
+        await book.updateBookCopiesAndAvailable(body);
         // response send after successful book find method 
         res.status(201).json({
             success: true,

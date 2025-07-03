@@ -56,12 +56,17 @@ const bookSchemaModel = new Schema<IBookModel>({
 });
 
 //Intance method Update Books Copies and Available 
-bookSchemaModel.methods.updateBookCopiesAndAvailable = async function (newBookCopies: number) {
-    if (newBookCopies <= 0) {
+bookSchemaModel.methods.updateBookCopiesAndAvailable = async function (bookBodies: IBookModel) {
+    if (bookBodies.copies <= 0) {
         throw new Error("Copies must be a positive number");
     };
+    this.title = bookBodies.title;
+    this.author = bookBodies.author;
+    this.genre = bookBodies.genre;
+    this.description = bookBodies.description;
+    this.genre = bookBodies.genre;
     // update copies 
-    this.copies = this.copies + newBookCopies;
+    this.copies = this.copies + bookBodies.copies;
     if (this.copies > 0) {
         this.available = true
     } else if (this.copies === 0) {
