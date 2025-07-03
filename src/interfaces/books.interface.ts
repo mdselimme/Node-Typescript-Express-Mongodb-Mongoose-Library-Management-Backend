@@ -15,5 +15,5 @@ export interface IBookModel {
 
 // Update Books Copies and Available Interface 
 export interface IBookModel extends Document {
-    updateBookCopiesAndAvailable(bookBodies: IBookModel): Promise<IBookModel>;
+    updateABookData(bookBodies: IBookModel): Promise<IBookModel>;
 }

@@ -78,7 +78,7 @@ export const updateABookById = async (req: Request, res: Response, next: NextFun
         if (!book) {
             throw new Error("Not a valid book id");
         };
-        await book.updateBookCopiesAndAvailable(body);
+        await book.updateABookData(body);
         // response send after successful book find method 
         res.status(201).json({
             success: true,
