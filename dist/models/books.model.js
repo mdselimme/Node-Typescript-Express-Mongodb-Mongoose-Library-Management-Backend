@@ -73,7 +73,6 @@ bookSchemaModel.methods.updateABookData = function (bookBodies) {
         this.author = bookBodies.author;
         this.genre = bookBodies.genre;
         this.description = bookBodies.description;
-        this.genre = bookBodies.genre;
         // update copies 
         this.copies = this.copies + bookBodies.copies;
         if (this.copies > 0) {

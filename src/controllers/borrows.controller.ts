@@ -47,7 +47,7 @@ export const getBorrowBooksSummery = async (req: Request, res: Response, next: N
                     },
                     book: {
                         $first: "$bookData"
-                    }
+                    },
                 }
             },
             // lookup the object 
@@ -57,6 +57,7 @@ export const getBorrowBooksSummery = async (req: Request, res: Response, next: N
                     book: {
                         title: "$book.title",
                         isbn: "$book.isbn",
+                        author: "$book.author"
                     },
                     totalQuantity: 1
                 }

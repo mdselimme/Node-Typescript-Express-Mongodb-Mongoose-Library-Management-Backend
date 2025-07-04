@@ -60,7 +60,7 @@ const getBorrowBooksSummery = (req, res, next) => __awaiter(void 0, void 0, void
                     },
                     book: {
                         $first: "$bookData"
-                    }
+                    },
                 }
             },
             // lookup the object 
@@ -70,6 +70,7 @@ const getBorrowBooksSummery = (req, res, next) => __awaiter(void 0, void 0, void
                     book: {
                         title: "$book.title",
                         isbn: "$book.isbn",
+                        author: "$book.author"
                     },
                     totalQuantity: 1
                 }
