@@ -105,9 +105,14 @@ Api Base Url: (https://library-management-server-s.vercel.app/)
 
 **GET** `https://library-management-server-s.vercel.app/api/books`
 
-Support sort and filter method:
+### Gets Total Documents Number For Pagination
 
-Example Query: `/api/books?filter=FANTASY&sortBy=createdAt&sort=desc&limit=5`;
+**GET** `https://library-management-server-s.vercel.app/api/books/book-count`
+
+Support sort, filter & pagination method :
+
+Pagination Exmp Query: `/api/books?page={number}&limit={number}`;
+Pagination with sort Example Query: `/api/books?filter=FANTASY&sortBy=createdAt&sort=desc&page={number}&limit={number}`;
 
 change limits: default limit 10;
 change filter: other genre value;
