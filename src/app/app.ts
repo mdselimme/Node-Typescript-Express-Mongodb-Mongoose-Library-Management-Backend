@@ -3,7 +3,7 @@ import cors from "cors";
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:5173', 'live-deploy-url']
+    origin: ['http://localhost:5173', "https://library-management-client-site.vercel.app", 'live-deploy-url']
 }));
 import { errorHandler } from './errorHandler';
 
@@ -17,7 +17,7 @@ import borrowsRouter from '../routes/borrows.route';
 app.get('/', async (req: Request, res: Response) => {
     res.json({
         running: "Library Management Server is Running ...",
-        version: 0.6
+        version: 0.2
     });
 });
 

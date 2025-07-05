@@ -17,7 +17,7 @@ const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:5173', 'live-deploy-url']
+    origin: ['http://localhost:5173', "https://library-management-client-site.vercel.app", 'live-deploy-url']
 }));
 const errorHandler_1 = require("./errorHandler");
 // Routes Imports 
@@ -27,7 +27,7 @@ const borrows_route_1 = __importDefault(require("../routes/borrows.route"));
 app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({
         running: "Library Management Server is Running ...",
-        version: 0.6
+        version: 0.2
     });
 }));
 // Routes Use 
