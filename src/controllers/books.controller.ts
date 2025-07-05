@@ -19,11 +19,23 @@ export const createBookPost = async (req: Request, res: Response, next: NextFunc
     }
 };
 
+// Books Count Function 
+export const booksCount = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await Books.estimatedDocumentCount({});
+        res.status(201).json({ count: result });
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 // Get All Books 
 export const getAllBooks = async (req: Request, res: Response, next: NextFunction) => {
     try {
         // book body 
-        const { filter, sortBy = "createdAt", sort = "desc", limit = "10" } = req.query;
+        const { filter, sortBy = "createdAt", sort = "desc", limit, page } = req.query;
+        console.log(page, limit)
         // make query filter object 
         const query: any = {};
         if (filter) {
@@ -35,7 +47,7 @@ export const getAllBooks = async (req: Request, res: Response, next: NextFunctio
         // limit parse 
         const dataLimit = parseInt(limit as string, 10);
         // get all books from db 
-        const getAllBooksResult = await Books.find(query).sort(sortOption).limit(dataLimit);
+        const getAllBooksResult = await Books.find(query).sort(sortOption).skip(Number(page) * dataLimit).limit(dataLimit);
         // response send after successful book create method 
         res.status(200).json({
             success: true,
