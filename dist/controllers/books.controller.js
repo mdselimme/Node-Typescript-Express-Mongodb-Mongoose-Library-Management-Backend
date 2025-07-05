@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteABookById = exports.updateABookById = exports.getABookById = exports.getAllBooks = exports.createBookPost = void 0;
+exports.deleteABookById = exports.updateABookById = exports.getABookById = exports.getAllBooks = exports.booksCount = exports.createBookPost = void 0;
 const books_model_1 = __importDefault(require("../models/books.model"));
 // Create A Book 
 const createBookPost = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -33,11 +33,23 @@ const createBookPost = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 exports.createBookPost = createBookPost;
+// Books Count Function 
+const booksCount = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield books_model_1.default.estimatedDocumentCount({});
+        res.status(201).json({ count: result });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+exports.booksCount = booksCount;
 // Get All Books 
 const getAllBooks = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // book body 
-        const { filter, sortBy = "createdAt", sort = "desc", limit = "10" } = req.query;
+        const { filter, sortBy = "createdAt", sort = "desc", limit, page } = req.query;
+        console.log(page, limit);
         // make query filter object 
         const query = {};
         if (filter) {
@@ -50,7 +62,7 @@ const getAllBooks = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         // limit parse 
         const dataLimit = parseInt(limit, 10);
         // get all books from db 
-        const getAllBooksResult = yield books_model_1.default.find(query).sort(sortOption).limit(dataLimit);
+        const getAllBooksResult = yield books_model_1.default.find(query).sort(sortOption).skip(Number(page) * dataLimit).limit(dataLimit);
         // response send after successful book create method 
         res.status(200).json({
             success: true,

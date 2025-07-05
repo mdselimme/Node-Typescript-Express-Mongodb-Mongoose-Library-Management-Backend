@@ -8,6 +8,8 @@ const booksRouter = express_1.default.Router();
 const books_controller_1 = require("../controllers/books.controller");
 // create book post 
 booksRouter.post('/', books_controller_1.createBookPost);
+// count book document 
+booksRouter.get('/books-count', books_controller_1.booksCount);
 // get all books 
 booksRouter.get('/', books_controller_1.getAllBooks);
 // get a book by id
