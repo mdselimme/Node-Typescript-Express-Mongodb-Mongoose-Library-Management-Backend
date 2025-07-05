@@ -168,13 +168,19 @@ change sort : asc or desc (default desc method);
 
 ### 4\. Update A Book By Id
 
-**PUT** `https://library-management-server-s.vercel.app/api/books/:bookId`
+**POST** `https://library-management-server-s.vercel.app/api/books/:bookId`
 
 #### Schema model:
 
 ```json
 {
-  "copies": "number" //value must positive number
+  "_id": ObjectId,
+  "title": "string",
+  "author": "string",
+  "genre": "string",
+  "description": "string",
+  "copies": "number", //value must positive number
+  "availability": "boolean"// true or false
 }
 ```
 
@@ -182,7 +188,14 @@ change sort : asc or desc (default desc method);
 
 ```json
 {
-  "copies": 50
+  "_id": "685802edc92b4ed7b9e888be",
+  "title": "Practical Next.js",
+  "author": "Fahim Rahman",
+  "genre": "NON_FICTION",
+  "isbn": "9781803244501",
+  "description": "Build performant web apps with Next.js.",
+  "copies": 19,
+  "available": true,
 }
 ```
 
