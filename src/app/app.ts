@@ -1,8 +1,10 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import cors from "cors";
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173', 'live-deploy-url']
+}));
 import { errorHandler } from './errorHandler';
 
 
@@ -25,7 +27,7 @@ app.use("/api/borrow", borrowsRouter);
 
 
 // Not found route 
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response) => {
     res.status(404).json({
         message: "Route url didn't match. Try with right url."
     })

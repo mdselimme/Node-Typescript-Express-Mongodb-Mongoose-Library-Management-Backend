@@ -16,7 +16,9 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: ['http://localhost:5173', 'live-deploy-url']
+}));
 const errorHandler_1 = require("./errorHandler");
 // Routes Imports 
 const books_route_1 = __importDefault(require("../routes/books.route"));
@@ -32,7 +34,7 @@ app.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 app.use("/api/books", books_route_1.default);
 app.use("/api/borrow", borrows_route_1.default);
 // Not found route 
-app.use((req, res, next) => {
+app.use((req, res) => {
     res.status(404).json({
         message: "Route url didn't match. Try with right url."
     });

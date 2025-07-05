@@ -35,18 +35,18 @@ export const getAllBooks = async (req: Request, res: Response, next: NextFunctio
     try {
         // book body 
         const { filter, sortBy = "createdAt", sort = "desc", limit, page } = req.query;
-        console.log(page, limit)
+
         // make query filter object 
-        const query: any = {};
+        const query: Record<string, unknown> = {};
         if (filter) {
             query.genre = filter
         };
         // making sort Option 
-        const sortOption: any = {};
+        const sortOption: Record<string, 1 | -1> = {};
         sortOption[sortBy as string] = (sort === "asc" ? 1 : -1);
         // limit parse 
         const dataLimit = parseInt(limit as string, 10);
-        // get all books from db 
+        // get all books from db with sor option 
         const getAllBooksResult = await Books.find(query).sort(sortOption).skip(Number(page) * dataLimit).limit(dataLimit);
         // response send after successful book create method 
         res.status(200).json({
